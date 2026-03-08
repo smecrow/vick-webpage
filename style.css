@@ -22,6 +22,11 @@
     box-sizing: border-box;
 }
 
+html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 100px; /* Evita que o topo (menu) cubra as sessões */
+}
+
 body {
     background-color: var(--color-black);
     color: var(--color-text);
@@ -90,15 +95,33 @@ a {
     margin-bottom: 0.5rem;
 }
 
+.title-logo {
+    height: 1.5em; /* increased from 1em */
+    width: auto;
+    vertical-align: middle;
+    margin: 0 0.5rem;
+    filter: drop-shadow(0 0 5px rgba(197, 160, 89, 0.3)); /* subtle glow */
+}
+
 .decorative-separator {
-    color: var(--color-ruby-red);
-    font-size: 1.2rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 40px; /* Force small height to ignore PNG transparent padding */
+    margin-top: 1rem;
     margin-bottom: 2rem;
-    letter-spacing: 10px;
+}
+
+.arabesque-img {
+    width: 100%;
+    max-width: 450px;
+    height: auto;
+    filter: drop-shadow(0 0 5px rgba(197, 160, 89, 0.2));
+    pointer-events: none; /* Previne bugar cliques em textos por cima da transparência */
 }
 
 .decorative-separator.left-aligned {
-    text-align: left;
+    justify-content: flex-end; /* Aligns to right since text is right-aligned */
 }
 
 /* Buttons */
@@ -292,29 +315,33 @@ a {
 
 .services-grid {
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 3rem;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1.5rem;
     margin-top: 3rem;
-    max-width: 1000px;
+    max-width: 1200px;
     margin-left: auto;
     margin-right: auto;
+    align-items: stretch;
 }
 
 .service-card {
     background: rgba(43, 2, 5, 0.3);
     border: 1px solid rgba(197, 160, 89, 0.2);
-    padding: 3rem 1.5rem;
+    padding: 2rem 1rem;
     text-align: center;
     transition: var(--transition);
     border-radius: 2px;
     display: flex;
     flex-direction: column;
-    min-height: 480px;
+    justify-content: flex-start;
+    align-items: center;
 }
 
 .service-details {
-    margin-top: auto;
-    margin-bottom: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin-top: 2rem;
 }
 
 .service-card p {
@@ -336,31 +363,40 @@ a {
 
 .service-icon {
     font-size: 3rem;
-    margin-bottom: 1.5rem;
+    margin-bottom: 0;
     color: var(--color-ruby-red);
 }
 
 .service-card h3 {
     color: var(--color-gold-light);
     font-family: var(--font-text);
-    font-size: 1.5rem;
-    margin-bottom: 1rem;
+    font-size: 1.1rem;
+    margin-bottom: 0;
+    margin-top: auto;
     text-transform: uppercase;
     letter-spacing: 2px;
 }
 
 /* Photos Section */
 .photos-section {
-    background-color: var(--color-black-light);
+    background-color: var(--color-black);
 }
 
 .category-title {
     font-family: var(--font-text);
     color: var(--color-gold-light);
     font-size: 2rem;
-    margin-bottom: 2rem;
+    margin-bottom: 0.5rem;
     text-transform: uppercase;
     letter-spacing: 2px;
+}
+
+.category-desc {
+    margin-bottom: 2rem;
+    font-size: 1.15rem;
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .photo-grid {
@@ -387,17 +423,20 @@ a {
     box-shadow: 0 10px 30px rgba(122, 4, 16, 0.4);
 }
 
-/* Break Image */
-.image-break {
-    height: 400px;
-    background: url('assets/main_background.jpg') fixed center center/cover;
-    position: relative;
+
+
+/* Cartomancia Section */
+.cartomancia-section {
+    background-color: var(--color-black-light);
 }
 
-.overlay-dark {
-    position: absolute;
-    top: 0; left: 0; width: 100%; height: 100%;
-    background: rgba(10, 10, 10, 0.85);
+.cartomancia-img {
+    max-width: 600px; /* Increased from 500px */
+    width: 100%;
+}
+
+.cartomancia-section .dual-col {
+    align-items: center; /* Alinha a imagem e o texto ao centro verticalmente */
 }
 
 /* Testimonials */
@@ -508,6 +547,40 @@ footer p {
     font-size: 0.9rem;
 }
 
+/* Scroll to Top Button */
+.scroll-to-top {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    background-color: var(--color-wine-deep);
+    color: var(--color-gold-light);
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid var(--color-gold);
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
+    z-index: 1000;
+    opacity: 0;
+    pointer-events: none;
+    transform: translateY(20px);
+    transition: all 0.3s ease-in-out;
+}
+
+.scroll-to-top.show {
+    opacity: 1;
+    pointer-events: auto;
+    transform: translateY(0);
+}
+
+.scroll-to-top:hover {
+    background-color: var(--color-ruby-red);
+    box-shadow: 0 0 20px rgba(122, 4, 16, 0.8);
+    transform: translateY(-5px);
+}
+
 /* Animations */
 @keyframes fadeUp {
     from {
@@ -531,6 +604,17 @@ footer p {
     transform: translateY(0);
 }
 
+/* Fix CSS specificity: ensure hover works even after element becomes visible */
+.service-card.fade-in.visible:hover {
+    transform: translateY(-10px);
+}
+.spell-photo.fade-in.visible:hover {
+    transform: scale(1.03);
+}
+.framed-image.fade-in.visible:hover {
+    transform: scale(1.02);
+}
+
 /* Responsive constraints */
 @media (max-width: 900px) {
     .dual-col {
@@ -549,6 +633,12 @@ footer p {
         display: none; /* simple mobile nav override */
     }
     
+    .services-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 600px) {
     .services-grid {
         grid-template-columns: 1fr;
     }
