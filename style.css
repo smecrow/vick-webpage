@@ -258,10 +258,14 @@ a {
 }
 
 .hero-content .subtitle {
-    font-size: 1.2rem;
-    margin-bottom: 2.5rem;
+    font-size: 1.5rem;
     color: var(--color-gold-light);
     font-style: italic;
+    margin-bottom: 0.2rem;
+}
+
+.hero-content .subtitle:last-of-type {
+    margin-bottom: 2.5rem;
 }
 
 /* About Section */
@@ -307,7 +311,7 @@ a {
     padding: 10px;
     background: var(--color-black-light);
     box-shadow: 0 0 30px rgba(43, 2, 5, 0.8);
-    border-radius: 4px;
+    border-radius: 18px;
     transition: var(--transition);
 }
 
@@ -425,7 +429,7 @@ a {
     max-width: 450px;
     height: auto;
     border: 3px solid var(--color-wine-deep);
-    border-radius: 4px;
+    border-radius: 18px;
     box-shadow: 0 0 25px rgba(10, 10, 10, 0.8);
     transition: var(--transition);
 }
@@ -676,6 +680,10 @@ footer p {
         font-size: 3.5rem !important;
         text-align: center !important;
         line-height: 1.2 !important;
+    }
+
+    .subtitle {
+        font-size: 0.8rem !important;
     }
 
     .about-header, .decorative-separator {
