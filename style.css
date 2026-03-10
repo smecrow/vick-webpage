@@ -81,7 +81,11 @@ a {
     font-family: var(--font-title);
     color: var(--color-gold);
     font-size: 10rem;
-    text-shadow: 0 0 15px rgba(197, 160, 89, 0.3);
+    text-shadow: 0 0 10px rgba(0, 0, 0, 0.9),
+                 0 0 20px rgba(197, 160, 89, 1),
+                 0 0 40px rgba(197, 160, 89, 0.9),
+                 0 0 80px rgba(197, 160, 89, 0.8),
+                 0 0 120px rgba(197, 160, 89, 0.6);
 }
 
 .mystical-title.small {
@@ -200,6 +204,15 @@ a {
     font-size: 1.8rem;
 }
 
+.menu-toggle {
+    display: none;
+    background: transparent;
+    border: none;
+    color: var(--color-gold);
+    cursor: pointer;
+    z-index: 1001;
+}
+
 .navbar nav ul {
     list-style: none;
     display: flex;
@@ -245,7 +258,7 @@ a {
 }
 
 .hero-content .subtitle {
-    font-size: 1.5rem;
+    font-size: 1.2rem;
     margin-bottom: 2.5rem;
     color: var(--color-gold-light);
     font-style: italic;
@@ -655,7 +668,8 @@ footer p {
     }
     
     .mystical-title {
-        font-size: 3rem;
+        font-size: 4.5rem;
+        line-height: 1.1;
     }
     
     .section-title {
@@ -681,8 +695,51 @@ footer p {
         padding: 1rem 2rem;
     }
     
-    .navbar nav {
-        display: none; /* simple mobile nav override */
+    .menu-toggle {
+        display: block;
+    }
+
+    .nav-menu {
+        position: fixed;
+        top: 0;
+        right: -100%;
+        width: 80%;
+        max-width: 300px;
+        height: 100vh;
+        background: var(--color-black);
+        border-left: 1px solid var(--color-wine-deep);
+        padding: 6rem 2rem 2rem;
+        transition: right 0.3s ease-in-out;
+        box-shadow: -10px 0 30px rgba(0,0,0,0.8);
+        overflow-y: auto;
+    }
+
+    .nav-menu.active {
+        right: 0;
+    }
+
+    .nav-menu ul {
+        flex-direction: column;
+        align-items: center;
+        gap: 2rem;
+    }
+
+    .nav-menu ul li {
+        width: 100%;
+        text-align: center;
+    }
+
+    .nav-menu ul li a {
+        display: block;
+        width: 100%;
+        font-size: 1.2rem;
+        text-align: center;
+    }
+
+    .nav-menu ul li a.btn-outline {
+        display: inline-block;
+        width: auto;
+        margin-top: 0;
     }
     
     .services-grid {

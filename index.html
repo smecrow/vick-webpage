@@ -21,10 +21,19 @@
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
-    <!-- Header / Nav -->
     <header class="navbar">
       <div class="logo">Vick Rosa em Chamas</div>
-      <nav>
+      
+      <!-- Hamburger Menu Button (Mobile Only) -->
+      <button class="menu-toggle" aria-label="Abrir menu">
+        <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="3" y1="12" x2="21" y2="12"></line>
+          <line x1="3" y1="6" x2="21" y2="6"></line>
+          <line x1="3" y1="18" x2="21" y2="18"></line>
+        </svg>
+      </button>
+
+      <nav class="nav-menu">
         <ul>
           <li><a href="#hero">Início</a></li>
           <li><a href="#about">Sobre a Feiticeira</a></li>
@@ -425,7 +434,8 @@
             <p class="quote">
               "A tiragem mais completa que eu já fiz, você é sempre muito
               sensível e conseguiu tirar o melhor dos meus traumas e das minhas
-              muitooo."
+              duvidas com o baralho, foi além das perguntas na verdade, eu amei
+              muitooo"
             </p>
             <p class="author">— Karina B.</p>
           </div>
@@ -568,6 +578,22 @@
     </a>
 
     <script>
+      // Mobile Menu Toggle Logic
+      const menuToggle = document.querySelector('.menu-toggle');
+      const navMenu = document.querySelector('.nav-menu');
+      const navLinks = document.querySelectorAll('.nav-menu ul li a');
+
+      menuToggle.addEventListener('click', () => {
+        navMenu.classList.toggle('active');
+      });
+
+      // Close menu when a link is clicked
+      navLinks.forEach(link => {
+        link.addEventListener('click', () => {
+          navMenu.classList.remove('active');
+        });
+      });
+
       // Scroll to Top Button Logic
       const scrollBtn = document.getElementById('scrollToTopBtn');
       const whatsappFloatBtn = document.getElementById('whatsappFloatBtn');
